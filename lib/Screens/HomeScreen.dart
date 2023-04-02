@@ -12,119 +12,129 @@ import 'package:provider/provider.dart';
 
 import '../providers/cfuserdata.dart';
 
-class Home extends StatefulWidget{
+class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return HomeState() ;
+    return HomeState();
   }
-
 }
 
-class HomeState extends State < Home> {
-  TextEditingController search = TextEditingController() ;
+class HomeState extends State<Home> {
+  TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    CFuserData prder = Provider.of<CFuserData>(context,listen:true);
-    CFuserData prderfal = Provider.of<CFuserData>(context,listen:false);
-
+    CFuserData prder = Provider.of<CFuserData>(context, listen: true);
+    CFuserData prderfal = Provider.of<CFuserData>(context, listen: false);
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           color: const Color(0xFFECF9FF),
           child: Column(
-
             children: [
               Container(
-                height: 150,
-                padding: EdgeInsets.all(15),
+                height: 670,
+                padding: EdgeInsets.symmetric(horizontal: 40,vertical: 30),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFB0DAFF),
-                  borderRadius: BorderRadius.only(topLeft:Radius.circular(35),topRight:Radius.circular(35)) ,
+                    color: Color(0xFFB0DAFF),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.elliptical(50,40),
+                        bottomRight: Radius.elliptical(50,40)),
                     boxShadow: [
                       BoxShadow(
                           color: Colors.black12,
                           // spreadRadius: 3,
-                          blurRadius: 5
-                      ),
-                    ]
-                ),
+                          blurRadius: 5),
+                    ]),
                 child: Column(
                   children: [
                     const Expanded(child: SizedBox()),
                     Row(
                       children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            height: 70,
-                            // width: 300,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFF5F3C1),
-                              borderRadius: BorderRadius.all(Radius.circular(25)) ,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black12,
-                                      // spreadRadius: 3,
-                                      blurRadius: 5
-                                  ),
-                                ]
-                            ),
-                            child: Contest(),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        Expanded(child: SizedBox()),
                         Container(
                           decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
+                              color: Colors.white,
+                              shape: BoxShape.circle,
                               boxShadow: [
-                              BoxShadow(
-                              color: Colors.black12,
-                            // spreadRadius: 3,
-                            blurRadius: 5
-                        ),
-          ]
-                          ),
+                                BoxShadow(
+                                    color: Colors.black12,
+                                    // spreadRadius: 3,
+                                    blurRadius: 5),
+                              ]),
                           child: IconButton(
-                              onPressed:(){
-                                prderfal.setleaderlist() ;
-                                Navigator.of(context).push(createRoute("leader", context));
+                              onPressed: () {
+                                prderfal.setleaderlist();
+                                Navigator.of(context)
+                                    .push(createRoute("leader", context));
                               },
-                              icon: const Icon(Icons.leaderboard_rounded,)),
-                        )
+                              icon: const Icon(
+                                Icons.leaderboard_rounded,
+                              )),
+                        ),
                       ],
+                    ), //leaderboard button
+                    SizedBox(
+                      height: 20,
                     ),
+                    Container(
+                        child: DataPage(
+                          rating: '${prder.Mydata.rating}',
+                          contribution: '${prder.Mydata.contribution}',
+                          title: 'Hello ${prder.Mydata.handle}',
+                          friendcount: '${prder.Mydata.friendOfCount}',
+                          maxrank: '${prder.Mydata.maxRank}',
+                          maxrating: '${prder.Mydata.maxRating}',
+                          photo: '${prder.Mydata.titlePhoto}',
+                          ranking: '${prder.Mydata.rank}',
+                        ),
+                    ), // data page
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ClickMe(
+                        title: "Detailed Analysis",
+                        doing: () {
+                          showToast(context, "ruk jaa bhai thodi der");
+                        }),
+
                   ],
                 ),
-              ),
+              ), // dark blue container
               Container(
-                padding:  const EdgeInsets.fromLTRB(35, 0, 35, 30),
+                padding: const EdgeInsets.fromLTRB(35, 0, 35, 30),
                 color: const Color(0xFFECF9FF),
-                child:  Column(
+                child: Column(
                   children: [
                     SizedBox(
                       height: 20,
                       width: MediaQuery.of(context).size.width,
                     ),
-                    const Text("Welcome To ClustersForce",
-                      style: TextStyle(
-                        fontFamily: "sofia",
-                        fontSize: 25
-                      ),
-                    ) ,
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Container(padding:EdgeInsets.symmetric(horizontal: 1),child: DataPage(rating: '${prder.Mydata.rating}', contribution: '${prder.Mydata.contribution}', title: 'Hello ${prder.Mydata.handle}', friendcount: '${prder.Mydata.friendOfCount}', maxrank: '${prder.Mydata.maxRank}', maxrating: '${prder.Mydata.maxRating}', photo: '${prder.Mydata.titlePhoto}', ranking: '${prder.Mydata.rank}',)),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ClickMe(title: "Detailed Analysis", doing: (){
-                      showToast(context, "ruk jaa bhai thodi der") ;
-                    }),
+                    // const Text("Welcome To ClustersForce",
+                    //   style: TextStyle(
+                    //     fontFamily: "sofia",
+                    //     fontSize: 25
+                    //   ),
+                    // ) ,
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      height: 70,
+                      // width: 300,
+                      decoration: const BoxDecoration(
+                          color: Color(0xFFF5F3C1),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black12,
+                                // spreadRadius: 3,
+                                blurRadius: 5),
+                          ]),
+                      child: Contest(),
+                    ),//contest container
+
                     const SizedBox(
                       height: 40,
                     ),
@@ -134,21 +144,22 @@ class HomeState extends State < Home> {
                     ),
                     Row(
                       children: [
-                        ClickMe(title: "Search", doing: ()async{
-                          await prderfal.searchdatafuc(search.text) ;
-                          print(prder.searchdata.handle) ;
-
-                        }),
+                        ClickMe(
+                            title: "Search",
+                            doing: () async {
+                              await prderfal.searchdatafuc(search.text);
+                              print(prder.searchdata.handle);
+                            }),
                       ],
                     ),
                     SizedBox(
                       height: 40,
                     ),
-                    searchdata() ,
+                    searchdata(),
                     SizedBox(
                       height: 40,
                     ),
-                    FriendsPage() ,
+                    FriendsPage(),
                   ],
                 ),
               ),
@@ -156,17 +167,19 @@ class HomeState extends State < Home> {
           ),
         ),
       ),
-    ) ;
+    );
   }
-  Route createRoute(String st,BuildContext context) {
+
+  Route createRoute(String st, BuildContext context) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-      (st=="leader")?leaderBoard() :Home() ,
+          (st == "leader") ? leaderBoard() : Home(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),

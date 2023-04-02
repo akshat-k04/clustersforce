@@ -23,11 +23,12 @@ class DataPage extends StatelessWidget{
       padding: const EdgeInsets.symmetric(horizontal: 15,
           vertical: 20),
       // width: 320,
-      height: 420,
+      height: 430,
 
       decoration: const BoxDecoration(
           color: Color(0xFFE8E2E2),
           shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
                 color: Color(0xFFAEC2B6),

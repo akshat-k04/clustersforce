@@ -69,7 +69,7 @@ class Info extends StatelessWidget{
           ),
           Row(
             children: [
-              Text(" ${Func(tem.second)}",
+              Text(tem.date,
                 style: TextStyle(
                   fontSize: 10
                 ),
@@ -80,41 +80,6 @@ class Info extends StatelessWidget{
       ),
     ) ;
   }
-  String Func(int second){
 
-    if(second<0){
-      second*=(-1) ;
-    }
-    int hr = (second/3600).round()  ;
-    if(second%3600>=1800){
-      hr-- ;
-    }
-    second-=(hr*3600) ;
-    int min=(second/60).round() ;
-    DateTime Date = DateTime.now() ;
-    int presenthour = Date.hour ;
-    int presentmin = Date.minute ;
-    int contesthr = presenthour+hr ;
-    int contestmin = presentmin+min ;
-    int td=(contestmin/60).round()  ;
-    if(contestmin%60>=30){
-      td-- ;
-    }
-    contesthr+= td;
-    contestmin-= (td*60) ;
-    if(contesthr<24){
-      return "start at ${contesthr}:${contestmin} Today" ;
-    }
-    else{
-      if(contesthr<48){
-        return "start at ${contesthr-24}:${contestmin} Tomorrow" ;
-      }
-      else {
-        int fg = ((contesthr-(contesthr%24))/24).round() ;
-        return "${fg} days left" ;
-      }
-    }
-    return "" ;
-  }
 }
 

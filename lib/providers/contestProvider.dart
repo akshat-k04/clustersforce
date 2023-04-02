@@ -21,7 +21,7 @@ class ContestProvid with ChangeNotifier{
         return temp ;
       }
     }
-    ContestModel error =ContestModel(name: "erroe", type: "error", id: 0, second: 0) ;
+    ContestModel error =ContestModel(name: "erroe", type: "error", id: 0, second: 0,date: "") ;
     return error ;
   }
 
